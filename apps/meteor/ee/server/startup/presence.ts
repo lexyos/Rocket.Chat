@@ -3,6 +3,7 @@ import { Accounts } from 'meteor/accounts-base';
 import { Meteor } from 'meteor/meteor';
 import { InstanceStatus } from '@rocket.chat/instance-status';
 import { Presence } from '@rocket.chat/core-services';
+import { SystemLogger } from '../../../server/lib/logger/system';
 
 // update connections count every 30 seconds
 const updateConns = throttle(function _updateConns() {
@@ -14,7 +15,7 @@ Meteor.startup(function () {
 
 	Meteor.onConnection(function (connection) {
 		const session = Meteor.server.sessions.get(connection.id);
-
+        SystemLogger.TooDoo('onConnection', connection);
 		connection.onClose(async function () {
 			if (!session) {
 				return;
@@ -30,6 +31,7 @@ Meteor.startup(function () {
 	});
 
 	Accounts.onLogin(function (login: any): void {
+        SystemLogger.TooDoo('onLogin', login);
 		if (login.type !== 'resume') {
 			return;
 		}

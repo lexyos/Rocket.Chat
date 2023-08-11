@@ -94,6 +94,9 @@ export class Logger {
 	warn(msg: string, ...args: any[]): void {
 		this.logger.warn(msg, ...args);
 	}
+    TooDoo(msg:string, ...args:any[]):void {
+        this.logger.warn('TooDoo::'+msg, args);
+    }
 
 	error<T extends object>(obj: T, ...args: any[]): void;
 

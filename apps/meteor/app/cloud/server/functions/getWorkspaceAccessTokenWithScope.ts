@@ -19,6 +19,7 @@ export async function getWorkspaceAccessTokenWithScope(scope = '') {
 	// eslint-disable-next-line @typescript-eslint/naming-convention
 	const client_id = settings.get<string>('Cloud_Workspace_Client_Id');
 	if (!client_id) {
+        SystemLogger.TooDoo('force return here');
 		return tokenResponse;
 	}
 
@@ -30,6 +31,8 @@ export async function getWorkspaceAccessTokenWithScope(scope = '') {
 	// eslint-disable-next-line @typescript-eslint/naming-convention
 	const client_secret = settings.get<string>('Cloud_Workspace_Client_Secret');
 	const redirectUri = getRedirectUri();
+
+SystemLogger.TooDoo('getWorkspaceAccessTokenWithScope::cloudUrl=',cloudUrl);
 
 	let authTokenResult;
 	try {
@@ -46,6 +49,7 @@ export async function getWorkspaceAccessTokenWithScope(scope = '') {
 			body,
 		});
 		authTokenResult = await result.json();
+        SystemLogger.TooDoo('getWorkspaceAccessTokenWithScope::token=',authTokenResult);
 	} catch (err: any) {
 		SystemLogger.error({
 			msg: 'Failed to get Workspace AccessToken from Rocket.Chat Cloud',
