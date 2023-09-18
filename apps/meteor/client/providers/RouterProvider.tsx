@@ -97,6 +97,7 @@ const buildRoutePath = (to: To): LocationPathname | `${LocationPathname}?${Locat
 	throw new Error('Invalid route');
 };
 
+var ready = false;
 const navigate = (
 	toOrDelta: To | number,
 	options?: {
@@ -108,9 +109,14 @@ const navigate = (
 		return;
 	}
 
-	const path = buildRoutePath(toOrDelta);
+	let path = buildRoutePath(toOrDelta);
+    if(!ready) {
+        window.addEventListener('load', function() {
+            setTimeout(function() {ready = true; navigate(toOrDelta);}, 0);
+        });
+        return;
+    }
 	const state = { path };
-
 	if (options?.replace) {
 		history.replaceState(state, '', path);
 	} else {
@@ -134,6 +140,7 @@ const updateFlowRouter = () => {
 };
 
 const defineRoutes = (routes: RouteObject[]) => {
+console.log('define router=', routes);
 	const flowRoutes = routes.map((route) => {
 		if (route.path === '*') {
 			FlowRouter.notFound = {
