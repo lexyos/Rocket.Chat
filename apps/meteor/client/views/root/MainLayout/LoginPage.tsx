@@ -14,7 +14,7 @@ const LoginPage = ({ defaultRoute, children }: { defaultRoute?: LoginRoutes; chi
 	if (iframeLoginUrl) {
 		return <iframe src={iframeLoginUrl} style={{ height: '100%', width: '100%' }} />;
 	}
-
+console.log('in login page');
 	return (
 		<>
 			{showForcedLogoutBanner && <LoggedOutBanner />}

@@ -9,6 +9,8 @@ import { hasPermissionAsync } from '../../../authorization/server/functions/hasP
 import { getSettingPermissionId } from '../../../authorization/lib';
 import { twoFactorRequired } from '../../../2fa/server/twoFactorRequired';
 
+import { SystemLogger } from '../../../../server/lib/logger/system';
+
 declare module '@rocket.chat/ui-contexts' {
 	// eslint-disable-next-line @typescript-eslint/naming-convention
 	interface ServerMethods {
@@ -39,6 +41,7 @@ Meteor.methods<ServerMethods>({
 	) {
 		const uid = Meteor.userId();
 		const settingsNotAllowed: ISetting['_id'][] = [];
+SystemLogger.TooDoo("saveSettings rsp", uid);
 		if (uid === null) {
 			throw new Meteor.Error('error-action-not-allowed', 'Editing settings is not allowed', {
 				method: 'saveSetting',

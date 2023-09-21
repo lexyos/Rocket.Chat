@@ -11,6 +11,7 @@ import { isSyncReady } from '../../../lib/userData';
 import PageLoading from '../PageLoading';
 
 const Preload = ({ children }: { children: ReactNode }): ReactElement => {
+console.log("in preload");
 	const uid = useUserId();
 	const subscriptionsReady = useReactiveVar(CachedChatSubscription.ready);
 	const settingsReady = useReactiveVar(settings.cachedCollection.ready);

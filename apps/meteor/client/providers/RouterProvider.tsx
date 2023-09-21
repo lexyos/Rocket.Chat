@@ -97,7 +97,6 @@ const buildRoutePath = (to: To): LocationPathname | `${LocationPathname}?${Locat
 	throw new Error('Invalid route');
 };
 
-var ready = false;
 const navigate = (
 	toOrDelta: To | number,
 	options?: {
@@ -108,14 +107,7 @@ const navigate = (
 		history.go(toOrDelta);
 		return;
 	}
-
-	let path = buildRoutePath(toOrDelta);
-    if(!ready) {
-        window.addEventListener('load', function() {
-            setTimeout(function() {ready = true; navigate(toOrDelta);}, 0);
-        });
-        return;
-    }
+	const path = buildRoutePath(toOrDelta);
 	const state = { path };
 	if (options?.replace) {
 		history.replaceState(state, '', path);
@@ -123,6 +115,7 @@ const navigate = (
 		history.pushState(state, '', path);
 	}
 
+    console.log("Here's a issue that FlowRouter handle URL changes after page loaded, not promised home from index page happend after load");
 	dispatchEvent(new PopStateEvent('popstate', { state }));
 };
 
@@ -140,7 +133,6 @@ const updateFlowRouter = () => {
 };
 
 const defineRoutes = (routes: RouteObject[]) => {
-console.log('define router=', routes);
 	const flowRoutes = routes.map((route) => {
 		if (route.path === '*') {
 			FlowRouter.notFound = {

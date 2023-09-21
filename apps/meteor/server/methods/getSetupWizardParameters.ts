@@ -4,6 +4,7 @@ import type { ServerMethods } from '@rocket.chat/ui-contexts';
 import { Meteor } from 'meteor/meteor';
 
 import { settings } from '../../app/settings/server';
+import { SystemLogger } from '../lib/logger/system';
 
 declare module '@rocket.chat/ui-contexts' {
 	// eslint-disable-next-line @typescript-eslint/naming-convention
@@ -19,7 +20,7 @@ Meteor.methods<ServerMethods>({
 	async getSetupWizardParameters() {
 		const setupWizardSettings = await Settings.findSetupWizardSettings().toArray();
 		const serverAlreadyRegistered = !!settings.get('Cloud_Workspace_Client_Id') || process.env.DEPLOY_PLATFORM === 'rocket-cloud';
-
+SystemLogger.TooDoo( "getSetupWizardParamters rsp with ", {settings: setupWizardSettings, serverAlreadyRegistered});
 		return {
 			settings: setupWizardSettings,
 			serverAlreadyRegistered,

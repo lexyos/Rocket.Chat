@@ -20,6 +20,7 @@ const AuthenticationCheck = ({ children, guest }: { children: ReactNode; guest?:
 	const allowAnonymousRead = useSetting('Accounts_AllowAnonymousRead');
 	const forceLogin = useSession('forceLogin');
 
+console.log('in Authcheck');
 	if (uid) {
 		return <UsernameCheck>{children}</UsernameCheck>;
 	}

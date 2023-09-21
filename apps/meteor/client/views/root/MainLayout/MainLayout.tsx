@@ -10,8 +10,8 @@ type MainLayoutProps = {
 } & Record<string, unknown>;
 
 const MainLayout = ({ children = null }: MainLayoutProps): ReactElement => {
+    console.log("in mainlayout");
 	useCustomScript();
-
 	return (
 		<Preload>
 			<AuthenticationCheck>

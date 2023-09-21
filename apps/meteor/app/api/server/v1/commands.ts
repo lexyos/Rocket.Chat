@@ -139,7 +139,7 @@ const processQueryOptionsOnResult = <T extends { _id?: string } & Record<string,
 
 API.v1.addRoute(
 	'commands.list',
-	{ authRequired: true },
+	{ authRequired: false },
 	{
 		async get() {
 			const params = this.queryParams as Record<string, any>;

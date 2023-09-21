@@ -556,6 +556,7 @@ API.v1.addRoute(
 					});
 				}
 
+SystemLogger.TooDoo(`${method} called`);
 				const result = await Meteor.callAsync(method, ...params);
 				return API.v1.success(mountResult({ id, result }));
 			} catch (err) {

@@ -38,11 +38,7 @@ const HomePage = (): ReactElement => {
 
 	const customOnly = useSetting('Layout_Custom_Body_Only');
 
-	if (customOnly) {
-		return <CustomHomePage />;
-	}
-
-	return <DefaultHomePage />;
+    return <DefaultHomePage />;
 };
 
 export default HomePage;

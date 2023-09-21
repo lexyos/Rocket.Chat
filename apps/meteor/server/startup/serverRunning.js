@@ -78,7 +78,7 @@ Meteor.startup(async function () {
 			exitIfNotBypassed(process.env.BYPASS_NODEJS_VALIDATION);
 		}
 
-		if (!semver.satisfies(semver.coerce(mongoVersion), '>=4.4.0')) {
+		if (!semver.satisfies(semver.coerce(mongoVersion), '>=4.0.0')) {
 			msg += ['', '', 'YOUR CURRENT MONGODB VERSION IS NOT SUPPORTED,', 'PLEASE UPGRADE TO VERSION 4.4 OR LATER'].join('\n');
 			showErrorBox('SERVER ERROR', msg);
 
