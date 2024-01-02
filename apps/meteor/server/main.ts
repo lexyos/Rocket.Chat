@@ -1,11 +1,11 @@
-import './models/startup';
-import './settings/index';
-import '../ee/server/models/startup';
-import './services/startup';
-import '../app/settings/server';
+import './models/startup'; // 模型的数据库结构和行为定义
+import './settings/index'; // 配置相关的控制逻辑
+import '../ee/server/models/startup'; // 企业版数据库行为定义
+import './services/startup'; // 启动产品服务，服务是一系列运行再系统后端的独立程序
+import '../app/settings/server'; // 加载服务端的配置数据
 import '../lib/oauthRedirectUriServer';
-import './lib/logger/startup';
-import './importPackages';
+import './lib/logger/startup'; // 加载日志模块
+import './importPackages'; // 加载独立业务
 import '../imports/startup/server';
 import '../app/lib/server/startup';
 
