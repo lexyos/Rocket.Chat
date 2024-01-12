@@ -33,10 +33,9 @@ const SidebarFooterDefault = (): ReactElement => {
 				width='auto'
 				className={sidebarFooterStyle}
 				dangerouslySetInnerHTML={{
-					__html: logo,
+					__html: "TooDoo......",
 				}}
 			/>
-			<SidebarFooterWatermark />
 		</Footer>
 	);
 };
