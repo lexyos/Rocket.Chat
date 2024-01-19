@@ -14,7 +14,7 @@ export const useTimeAgo = (): ((time: Date | number | string) => string) => {
 		(time) =>
 			moment(time).calendar(null, {
 				sameDay: format,
-				lastDay: moment().localeData().calendar('lastDay').replace('LT', format),
+				lastDay: moment().localeData().calendar('lastDay', {minutes:()=>{return 0;}).replace('LT', format),
 				lastWeek: `dddd ${format}`,
 				sameElse: 'LL',
 			}),
