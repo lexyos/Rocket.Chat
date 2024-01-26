@@ -8,25 +8,25 @@ export function addSettings(): Promise<void> {
 				modules: ['videoconference-enterprise'],
 			},
 			async function () {
-				await this.add('VideoConf_Enable_DMs', true, {
+				await this.add('VideoConf_Enable_DMs', false, {
 					type: 'boolean',
 					public: true,
 					invalidValue: true,
 				});
 
-				await this.add('VideoConf_Enable_Channels', true, {
+				await this.add('VideoConf_Enable_Channels', false, {
 					type: 'boolean',
 					public: true,
 					invalidValue: true,
 				});
 
-				await this.add('VideoConf_Enable_Groups', true, {
+				await this.add('VideoConf_Enable_Groups', false, {
 					type: 'boolean',
 					public: true,
 					invalidValue: true,
 				});
 
-				await this.add('VideoConf_Enable_Teams', true, {
+				await this.add('VideoConf_Enable_Teams', false, {
 					type: 'boolean',
 					public: true,
 					invalidValue: true,
