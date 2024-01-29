@@ -48,11 +48,11 @@ addAction('start-call', ({ room }) => {
 
 	const ownUser = room.uids && room.uids.length === 1;
 
-	// Only disable video conf if the settings are explicitly FALSE - any falsy value counts as true
-	const enabledDMs = useSetting('VideoConf_Enable_DMs') !== false;
-	const enabledChannel = useSetting('VideoConf_Enable_Channels') !== false;
-	const enabledTeams = useSetting('VideoConf_Enable_Teams') !== false;
-	const enabledGroups = useSetting('VideoConf_Enable_Groups') !== false;
+	// Only enable video conf if the settings are explicitly TRUE - any falsy value counts as false
+	const enabledDMs = useSetting('VideoConf_Enable_DMs') === true;
+	const enabledChannel = useSetting('VideoConf_Enable_Channels') === true;
+	const enabledTeams = useSetting('VideoConf_Enable_Teams') === true;
+	const enabledGroups = useSetting('VideoConf_Enable_Groups') === true;
 	const enabledLiveChat = useSetting('Omnichannel_call_provider') === 'default-provider';
 
 	const live = room?.streamingOptions && room.streamingOptions.type === 'call';
