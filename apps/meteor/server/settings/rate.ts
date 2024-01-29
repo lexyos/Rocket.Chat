@@ -55,8 +55,8 @@ export const createRateLimitSettings = () =>
 		});
 
 		await this.section('API_Rate_Limiter', async function () {
-			await this.add('API_Enable_Rate_Limiter', true, { type: 'boolean' });
-			await this.add('API_Enable_Rate_Limiter_Dev', true, {
+			await this.add('API_Enable_Rate_Limiter', false, { type: 'boolean' });
+			await this.add('API_Enable_Rate_Limiter_Dev', false, {
 				type: 'boolean',
 				enableQuery: { _id: 'API_Enable_Rate_Limiter', value: true },
 			});
