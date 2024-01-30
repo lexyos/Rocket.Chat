@@ -32,7 +32,6 @@ const Header = (): ReactElement => {
 				{user && (
 					<>
 						<Directory title={t('Directory')} />
-						<Sort title={t('Display')} />
 						<CreateRoom title={t('Create_new')} data-qa='sidebar-create' />
 						<Administration title={t('Administration')} />
 					</>
