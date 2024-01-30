@@ -75,9 +75,9 @@ export const useCreateRoomItems = (): GenericMenuItemProps[] => {
 
 	return [
 		...(canCreateChannel ? [createChannelItem] : []),
-//		...(canCreateTeam ? [createTeamItem] : []),
+		...(canCreateTeam ? [createTeamItem] : []),
 		...(canCreateDirectMessages ? [createDirectMessageItem] : []),
-//		...(canCreateDiscussion && discussionEnabled ? [createDiscussionItem] : []),
+		...(canCreateDiscussion && discussionEnabled ? [createDiscussionItem] : []),
 //		...(isMatrixEnabled ? [matrixFederationSearchItem] : []),
 	];
 };
