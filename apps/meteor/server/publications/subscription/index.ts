@@ -42,7 +42,7 @@ Meteor.methods<ServerMethods>({
 				).toArray(),
 			};
 		}
-
+Meteor.Log.TooDoo(records);
 		return records;
 	},
 });

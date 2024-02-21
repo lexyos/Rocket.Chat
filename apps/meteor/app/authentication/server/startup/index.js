@@ -20,7 +20,6 @@ import { safeHtmlDots } from '../../../../lib/utils/safeHtmlDots';
 import { joinDefaultChannels } from '../../../lib/server/functions/joinDefaultChannels';
 import { setAvatarFromServiceWithValidation } from '../../../lib/server/functions/setUserAvatar';
 import { i18n } from '../../../../server/lib/i18n';
-import { SystemLogger } from '../../../../server/lib/logger/system';
 
 Accounts.config({
 	forbidClientAccountCreation: true,
@@ -159,7 +158,7 @@ const getLinkedInName = ({ firstName, lastName }) => {
 };
 
 const onCreateUserAsync = async function (options, user = {}) {
-SystemLogger.TooDoo("onCreateUserAsync", { "options":options, "user":user });
+Meteor.Log.TooDoo("onCreateUserAsync", { "options":options, "user":user });
 	await callbacks.run('beforeCreateUser', options, user);
 
 	user.status = 'offline';
@@ -322,7 +321,7 @@ Accounts.insertUserDoc = function (...args) {
 
 const validateLoginAttemptAsync = async function (login) {
 	login = await callbacks.run('beforeValidateLogin', login);
-SystemLogger.TooDoo("validateLoginAttemptAsync", login);
+Meteor.Log.TooDoo("validateLoginAttemptAsync", login);
 	if (!(await isValidLoginAttemptByIp(getClientAddress(login.connection)))) {
 		throw new Meteor.Error('error-login-blocked-for-ip', 'Login has been temporarily blocked For IP', {
 			function: 'Accounts.validateLoginAttempt',

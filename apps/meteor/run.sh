@@ -1,5 +1,9 @@
 #!/bin/bash
 
+pkill -9 node
+
+sleep 1
+
 export \
     SKIP_MONGODEPRECATION_CHECK=true \
     SKIP_MONGODEPRECATION_BANNER=true \
@@ -9,4 +13,4 @@ export \
     MONGO_URL=mongodb://localhost:27017/rocketchat \
     MONGO_OPLOG_URL=mongodb://localhost:27017/local
 
-meteor
+nohup meteor&
