@@ -1,5 +1,5 @@
 import type { Timestamp, Db, ChangeStreamDeleteDocument, ChangeStreamInsertDocument, ChangeStreamUpdateDocument } from 'mongodb';
-import { getConnection } from "./mongo"
+import from "./mongo"
 
 export class Workspace {
 

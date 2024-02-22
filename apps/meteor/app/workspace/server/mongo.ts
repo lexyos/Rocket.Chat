@@ -1,10 +1,9 @@
-//import { MongoClient } from 'mongodb';
-//import type { Db, Collection, MongoClientOptions, Document } from 'mongodb';
+import { MongoClient } from 'mongodb';
+import type { Db, Collection, MongoClientOptions, Document } from 'mongodb';
 
 // a map which as mongo_url : Db
 let databases : {[key:string] : Db } = {};
 
-/*
 function connectDb(mongo_url:string, options?: MongoClientOptions): Promise<MongoClient> {
 	const client = new MongoClient(mongo_url, options);
 
@@ -37,4 +36,3 @@ export const getConnection = ((): ((mongo_url:string, options?: MongoClientOptio
 	};
 })();
 
-*/
