@@ -31,7 +31,6 @@ export async function getConnection(mongo_url:string, options?: MongoClientOptio
     } else {
         console.log(`connection ${host}`);
         client = await connectDb(host, options);
-        console.log(`client is ${client}`);
         if(databases[host]) {
             client = databases[host].self;
         } else {

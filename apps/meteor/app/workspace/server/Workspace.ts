@@ -3,6 +3,9 @@ import { getConnection } from "./mongo"
 
 export class Workspace {
 
+    // mongo_url 
+    private _url : string;
+
     // id of workspace in DB
     private _id : string;
 
@@ -19,14 +22,14 @@ export class Workspace {
     private _roster : {[key:string] : object };
 
     constructor(url:string) {
-        console.log('in workspace');
-        this._db = getConnection(url);
+        this._url = url;
         this.init();
     }
 
     async init() : void {
-        console.log('init');
-        //await this._db.createCollection("pet");
+        this._db = await getConnection(this._url);
+        await this._db.createCollection("messages").catch((err)=>{ if(err.code!==48) throw e; });
+        await this._db.createCollection("settings").catch((err)=>{ if(err.code!==48) throw e; });;
     }
 }
 
