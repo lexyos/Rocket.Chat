@@ -1,10 +1,11 @@
 import { MongoClient } from 'mongodb';
 import type { Db, Collection, MongoClientOptions, Document } from 'mongodb';
 
-// a map which as mongo_url : Db
-let databases : {[key:string] : Db } = {};
 
-function connectDb(mongo_url:string, options?: MongoClientOptions): Promise<MongoClient> {
+// a map which as mongo_url : Db
+let databases : { self:MongoClient, dbs: { [key:string]:Db} } = {};
+
+function connectDb(mongo_url:string, options?: MongoClientOptions) : Promise<MongoClient> {
 	const client = new MongoClient(mongo_url, options);
 
 	return client.connect().catch((error) => {
@@ -14,25 +15,31 @@ function connectDb(mongo_url:string, options?: MongoClientOptions): Promise<Mong
 	});
 }
 
-export const getConnection = ((): ((mongo_url:string, options?: MongoClientOptions) => Promise<Db>) => {
-	let client: MongoClient;
+export async function getConnection(mongo_url:string, options?: MongoClientOptions) {
 
-	return async (mongo_url, options): Promise<Db> => {
-
-        let db = databases[mongo_url];
-		if (db) {
-			return db;
-		}
-
-        const name = /^mongodb:\/\/.*?(?::[0-9]+)?\/([^?]*)/.exec(mongo_url)?.[1];
-		if (client == null) {
-			client = await connectDb(mongo_url, options);
-			db = client.db(name);
-            databases[mongo_url] = db;
-		}
-
-		// if getConnection was called multiple times before it was connected, wait for the connection
-		return client.db(name);
-	};
-})();
+    const name = /^mongodb:\/\/.*?(?::[0-9]+)?\/([^?]*)/.exec(mongo_url)?.[1];
+    const host = mongo_url.replace(/\/[^\/]*$/, '/'); 
+    
+    let client = databases[host];
+    if(client) {
+        let db = client.dbs[name];
+        if(db)
+            return db;
+        else 
+            client.dbs[name] = client.self.db(name);
+            
+    } else {
+        console.log(`connection ${host}`);
+        client = await connectDb(host, options);
+        console.log(`client is ${client}`);
+        if(databases[host]) {
+            client = databases[host].self;
+        } else {
+            databases[host] =  {self:client, dbs: {} };
+        }
+        let db = client.db(name);
+        databases[host].dbs[name] = db;
+        return db;
+    }
+}
 

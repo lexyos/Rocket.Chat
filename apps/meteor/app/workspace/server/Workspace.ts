@@ -1,5 +1,5 @@
 import type { Timestamp, Db, ChangeStreamDeleteDocument, ChangeStreamInsertDocument, ChangeStreamUpdateDocument } from 'mongodb';
-import from "./mongo"
+import { getConnection } from "./mongo"
 
 export class Workspace {
 
@@ -18,10 +18,21 @@ export class Workspace {
     //roster of a worksapce
     private _roster : {[key:string] : object };
 
-    constructor(mongo_url:string, database:Db) {
-        if(database)
-            this._db = database;
-        else
-            this._db = await getConnection(mongo_url);
+    constructor(url:string) {
+        console.log('in workspace');
+        this._db = getConnection(url);
+        this.init();
+    }
+
+    async init() : void {
+        console.log('init');
+        //await this._db.createCollection("pet");
     }
 }
+
+new Workspace("mongodb://localhost:27017/test1");
+new Workspace("mongodb://localhost:27017/test2");
+new Workspace("mongodb://localhost:27017/test3");
+new Workspace("mongodb://localhost:27017/test4");
+new Workspace("mongodb://localhost:27017/test5");
+new Workspace("mongodb://localhost:27017/test1");
