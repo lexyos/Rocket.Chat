@@ -10,8 +10,7 @@ function connectDb(mongo_url:string, options?: MongoClientOptions) : Promise<Mon
 
 	return client.connect().catch((error) => {
 		// exits the process in case of any error
-		console.error(error);
-		process.exit(1);
+        return undefined;
 	});
 }
 
@@ -29,8 +28,10 @@ export async function getConnection(mongo_url:string, options?: MongoClientOptio
             client.dbs[name] = client.self.db(name);
             
     } else {
-        console.log(`connection ${host}`);
         client = await connectDb(host, options);
+        if(!client)
+            return null;
+
         if(databases[host]) {
             client = databases[host].self;
         } else {

@@ -1,4 +1,4 @@
-import { Db } from 'mongodb';
+import { Db,ObjectId } from 'mongodb';
 import { getConnection } from "./mongo"
 import { MongoInternals } from 'meteor/mongo';
 const { db } = MongoInternals.defaultRemoteCollectionDriver().mongo;
@@ -24,21 +24,23 @@ export class Workspace {
     private _roster : {[key:string] : object };
 
     constructor(id:string) {
-        //this._id = new ObjectId(id);
+        this._id = id;
         this.init();
     }
 
     async init() : void {
         let col = db.collection('rocketchat_workspace');
-        let doc = await col.findOne({name:'test1'});
-        console.log(doc);
+        let doc = await col.findOne({_id:new ObjectId(this._id)});
+        if(!doc?.url)
+            return;
         this._url = doc.url;
         this._db = await getConnection(this._url);
+        if(!this._db)
+            return;
         await this._db.createCollection("messages").catch((err)=>{ if(err.code!==48) throw e; });
         await this._db.createCollection("settings").catch((err)=>{ if(err.code!==48) throw e; });
     }
 }
-
 new Workspace("65e98f437377750b5b45a323");
-new Workspace("65e98f437377750b5b45a324");
-new Workspace("65e98f437377750b5b45a325");
+new Workspace("65e98f4a7377750b5b45a324");
+new Workspace("65e98f507377750b5b45a325");

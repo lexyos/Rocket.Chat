@@ -4,6 +4,7 @@ pkill -9 node
 
 sleep 1
 
+rm -f nohup.out
 export \
     SKIP_MONGODEPRECATION_CHECK=true \
     SKIP_MONGODEPRECATION_BANNER=true \
